@@ -43,9 +43,7 @@ public class Order {
         return discountPrice;
     }
 
-    public void setDiscountPrice(int discountPrice) {
-        this.discountPrice = discountPrice;
-    }
+    public void setDiscountPrice(int discountPrice) {this.discountPrice = discountPrice;}
 
     @Override
     public String toString() { // toString을 하면 쉽게 출력문 확인 하여서 쓴다.

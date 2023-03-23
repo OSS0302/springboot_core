@@ -1,6 +1,4 @@
 package oss.core.order;
-
-
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import oss.core.member.Grade;

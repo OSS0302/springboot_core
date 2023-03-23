@@ -5,8 +5,8 @@ import java.util.Map;
 
 public class MemoryMemberRepository implements  MemberRepository{
 
-    private static Map<Long ,Member> store = new HashMap<>();
-
+    private static Map<Long ,Member> store = new HashMap<>(); // 동시성 이슈 가있을 수있어서
+    // 컨커러데시브 map 사용하지만 여기서는 간단한 map 사용 
     @Override
     public void save(Member member) {
     store.put(member.getId(), member);
