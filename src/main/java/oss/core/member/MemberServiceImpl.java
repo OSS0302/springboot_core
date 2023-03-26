@@ -6,7 +6,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void join(Member member) {
 // join에서 save를 호출하면 다형성에 의해서 MemorymemberRepository를 호출하면 MemorymemberRepository 안에 save 가 호출된다.
-    memberRepository.save(member);
+        memberRepository.save(member);
     }
 
     @Override
