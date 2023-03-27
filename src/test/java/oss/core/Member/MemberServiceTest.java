@@ -2,14 +2,22 @@ package oss.core.Member;
 
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import oss.core.AppConfig;
 import oss.core.member.Grade;
 import oss.core.member.Member;
 import oss.core.member.MemberService;
 import oss.core.member.MemberServiceImpl;
 
 public class MemberServiceTest {
-    MemberService memberService = new MemberServiceImpl(); // 필드변수에 Service 구현체를 만들어야한다.
+    //MemberService memberService = new MemberServiceImpl(); // 필드변수에 Service 구현체를 만들어야한다.
+    MemberService memberService;
+    @BeforeEach
+    public void beforeEach(){
+        AppConfig appConfig =new AppConfig();
+        memberService = appConfig.memberService();
+    }
     @Test
     void join(){
         //given
