@@ -2,6 +2,7 @@ package oss.core;
 
 import oss.core.discount.DiscountPolicy;
 import oss.core.discount.FixDiscountPolicy;
+import oss.core.discount.RateDiscountPolicy;
 import oss.core.member.MemberRepository;
 import oss.core.member.MemberService;
 import oss.core.member.MemberServiceImpl;
@@ -24,6 +25,7 @@ public class AppConfig {
                 memberRepository(),discountPolicy());
     }
     public DiscountPolicy discountPolicy (){
-        return new FixDiscountPolicy();
+        //return new FixDiscountPolicy(); 고정 할인 정책
+        return new RateDiscountPolicy(); // 할인율 정책
     }
 }
