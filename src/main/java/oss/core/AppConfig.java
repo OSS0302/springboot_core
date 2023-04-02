@@ -3,7 +3,7 @@ package oss.core;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import oss.core.discount.DiscountPolicy;
-import oss.core.discount.FixDiscountPolicy;
+
 import oss.core.discount.RateDiscountPolicy;
 import oss.core.member.MemberRepository;
 import oss.core.member.MemberService;
