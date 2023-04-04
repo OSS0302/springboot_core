@@ -18,6 +18,17 @@ class ApplicationContextBasicFindTest {
         MemberService memberService = ac.getBean("memberService", MemberService.class);
         assertThat(memberService).isInstanceOf(MemberService.class);
     }
-
-
+    @Test
+    @DisplayName("이름없이 타입으로만 조회")
+    void findBeanByType(){
+        MemberService memberService = ac.getBean(MemberService.class);//이름을 생략이 가능하다.
+        assertThat(memberService).isInstanceOf(MemberService.class);
+    }
+    @Test
+    @DisplayName("구체 타입으로  조회")
+    void findBeanName2() {
+        MemberServiceImpl memberService = ac.getBean("memberService", MemberServiceImpl.class);
+        assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
+        //구현에 의존 했으므로 별로 좋은 코딩이 아니다 역할에만 의존하는 것이 좋다.
+    }
 }
