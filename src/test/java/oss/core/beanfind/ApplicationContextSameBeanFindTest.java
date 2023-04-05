@@ -1,12 +1,14 @@
 package oss.core.beanfind;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import oss.core.AppConfig;
-import oss.core.discount.DiscountPolicy;
+
 import oss.core.member.MemberRepository;
 import oss.core.member.MemoryMemberRepository;
 
@@ -16,8 +18,12 @@ public class ApplicationContextSameBeanFindTest {
     @Test
     @DisplayName("타입으로 조회시 같은 타입이 둘 이상 있으므로 중복 오류가 발생한다.")
     void findBeanByTypeDuplicate(){
-        ac.getBean(MemberRepository.class);
+        //MemberRepository bean = ac.getBean(MemberRepository.class);
+     assertThrows(NoSuchBeanDefinitionException.class,
+    ()->ac.getBean(MemberRepository.class));
+
     }
+
     // config 새로 만든다.
     @Configuration
     static class SameBeanConfig{
