@@ -1,5 +1,6 @@
 package oss.core.beanfind;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
@@ -13,16 +14,23 @@ import oss.core.member.MemberRepository;
 import oss.core.member.MemoryMemberRepository;
 
 public class ApplicationContextSameBeanFindTest {
-    AnnotationConfigApplicationContext ac= new AnnotationConfigApplicationContext(SameBeanConfig.class  ); // 커맨드 +E 이전으로 돌아가기
+    AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(SameBeanConfig.class); // 커맨드 +E 이전으로 돌아가기
+
     // AppConfig을 손을 떼야하므로 위에 AppConfig.class을 삭제한다.
     @Test
     @DisplayName("타입으로 조회시 같은 타입이 둘 이상 있으므로 중복 오류가 발생한다.")
-    void findBeanByTypeDuplicate(){
+    void findBeanByTypeDuplicate() {
         //MemberRepository bean = ac.getBean(MemberRepository.class);
-     assertThrows(NoSuchBeanDefinitionException.class,
-    ()->ac.getBean(MemberRepository.class));
-
+        assertThrows(NoSuchBeanDefinitionException.class,
+                () -> ac.getBean(MemberRepository.class));
+    }    @Test
+    @DisplayName("타입으로 조회시 같은 타입이 둘 이상 있으면 빈 이름을 지정하면 된다.")
+    void findBeanByName(){
+        MemberRepository memberRepository  = ac.getBean("memberRepository1",MemberRepository.class);
+        assertThat(memberRepository).isInstanceOf(MemberRepository.class);
     }
+
+
 
     // config 새로 만든다.
     @Configuration
