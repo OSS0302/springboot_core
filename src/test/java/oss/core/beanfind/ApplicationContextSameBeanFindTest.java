@@ -13,6 +13,8 @@ import org.springframework.context.annotation.Configuration;
 import oss.core.member.MemberRepository;
 import oss.core.member.MemoryMemberRepository;
 
+import java.util.Map;
+
 public class ApplicationContextSameBeanFindTest {
     AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(SameBeanConfig.class); // 커맨드 +E 이전으로 돌아가기
 
@@ -30,19 +32,30 @@ public class ApplicationContextSameBeanFindTest {
         assertThat(memberRepository).isInstanceOf(MemberRepository.class);
     }
 
+    @Test
+    @DisplayName("특정 타입을 모두 조회하기") // command +shift+enter
+    void findAllBeanByType() {
+        Map<String, MemberRepository> beansOfType = ac.getBeansOfType(MemberRepository.class);
+        for (String key : beansOfType.keySet()) {
+            System.out.println("key = " + key+"value= "+beansOfType.get(key));
+        }
+        System.out.println("beansOfType = " + beansOfType);
+        assertThat(beansOfType.size()).isEqualTo(2);
+    }
+
 
 
     // config 새로 만든다.
     @Configuration
-    static class SameBeanConfig{
+    static class SameBeanConfig {
         // 두개가 빈으로 등록이 되서 스프링부트입장에서는 무엇을 선택을 해야할 지모른다.
         @Bean
-        public MemberRepository memberRepository1(){
+        public MemberRepository memberRepository1() {
             return new MemoryMemberRepository();
         }
 
         @Bean
-        public MemberRepository memberRepository2(){
+        public MemberRepository memberRepository2() {
             return new MemoryMemberRepository();
         }
     }
