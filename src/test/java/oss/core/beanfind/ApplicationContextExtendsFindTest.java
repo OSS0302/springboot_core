@@ -48,7 +48,16 @@ public class ApplicationContextExtendsFindTest {
         }
     }
     @Test
-    @
+    @DisplayName("부모타입으로 모두조회하기 Object")
+    void findBeanBYObjectTyepe(){
+        Map<String, Object> beansOfType = ac.getBeansOfType(Object.class);
+
+        for (String key: beansOfType.keySet()) {
+            System.out.println("key = " + key+"value = "+beansOfType.get(key));
+
+        }
+    }
+
 
     @Configuration
     static class TestConfig{
