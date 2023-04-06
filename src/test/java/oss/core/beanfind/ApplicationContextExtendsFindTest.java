@@ -12,6 +12,8 @@ import oss.core.discount.DiscountPolicy;
 import oss.core.discount.FixDiscountPolicy;
 import oss.core.discount.RateDiscountPolicy;
 
+import java.util.Map;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -36,7 +38,17 @@ public class ApplicationContextExtendsFindTest {
         RateDiscountPolicy bean = ac.getBean(RateDiscountPolicy.class);
         assertThat(bean).isInstanceOf(RateDiscountPolicy.class);
     }
-
+    @Test
+    @DisplayName("부모타입으로 전체다 조회하기 ")
+    void findAllBeanByparentType(){
+        Map<String, DiscountPolicy> beansOfType = ac.getBeansOfType(DiscountPolicy.class);
+        assertThat(beansOfType.size()).isEqualTo(2);
+        for (String key : beansOfType.keySet()) {
+            System.out.println("key = " + key+"value ="+beansOfType.get(key));
+        }
+    }
+    @Test
+    @
 
     @Configuration
     static class TestConfig{
