@@ -2,7 +2,6 @@ package oss.core.SingletonTest;
 
 
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import oss.core.AppConfig;
@@ -35,6 +34,14 @@ public class SingletonTest {
 
         // memberService2!=  memberService3
         assertThat(memberService2).isNotSameAs(memberService3);
+
+
+    }
+    @Test
+    @DisplayName("싱글톤 패턴을 적용한 객체사용")
+    void singletonServiceTest(){
+        //private으로 생성자를 막아두었다. 컴파일 오류가 발생한다.
+         new SingletonService();
 
 
     }
