@@ -11,7 +11,7 @@ import oss.core.AppConfig;
 public class BeanDefinitionTest {
 
     //AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
-    ApplicationContext ac = new GenericXmlApplicationContext("appConfig.xml"); //getgetBeanDefinition을 쓸 수없다
+    GenericXmlApplicationContext ac = new GenericXmlApplicationContext("appConfig.xml"); //ApplicationContext->getgetBeanDefinition을 쓸 수없다
     @Test
     @DisplayName("빈 설정 메타정보 확인")
     void findApplicationBean(){
