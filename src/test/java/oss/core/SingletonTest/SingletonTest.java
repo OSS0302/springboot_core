@@ -4,6 +4,8 @@ package oss.core.SingletonTest;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import oss.core.AppConfig;
 import oss.core.member.MemberService;
 
@@ -39,7 +41,7 @@ public class SingletonTest {
     }
     @Test
     @DisplayName("싱글톤 패턴을 적용한 객체사용")
-    void singletonServiceTest(){
+    void singletonServiceTest() {
         //private으로 생성자를 막아두었다. 컴파일 오류가 발생한다.
         // new SingletonService();
 
@@ -55,5 +57,24 @@ public class SingletonTest {
         assertThat(singletonService1).isSameAs(singletonService2);
         // same == 같은지 비교 // equals 자바의 이퀄스와 같은 의미다.
     }
+        @Test
+        @DisplayName("스프링 컨테이너와 싱글톤")
+        void SpringContainer() {
+            //AppConfig appConfig =new AppConfig();
+            ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+            MemberService memberService1 = ac.getBean("memberService",MemberService.class);
+            MemberService memberService2 = ac.getBean("memberService",MemberService.class);
+            MemberService memberService3 = ac.getBean("memberService",MemberService.class);
+            // 참조값이 다른 것을 확인 한다.
+            System.out.println("memberService1 = " + memberService1);
+            System.out.println("memberService2 = " + memberService2);
+            System.out.println("memberService3 = " + memberService3);
+            //테스트 자동화 검증를 하기위해서
+            // memberService1!=  memberService2
+            assertThat(memberService1).isSameAs(memberService2);
+
+            // memberService2!=  memberService3
+            assertThat(memberService2).isSameAs(memberService3); //!= 와 같지 않은지 비교
+        }
 }
 
