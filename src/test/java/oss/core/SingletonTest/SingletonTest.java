@@ -33,7 +33,7 @@ public class SingletonTest {
         assertThat(memberService1).isNotSameAs(memberService2);
 
         // memberService2!=  memberService3
-        assertThat(memberService2).isNotSameAs(memberService3);
+        assertThat(memberService2).isNotSameAs(memberService3); //!= 와 같지 않은지 비교
 
 
     }
@@ -51,7 +51,9 @@ public class SingletonTest {
         System.out.println("singletonService1 = " + singletonService1);
         System.out.println("singletonService2 = " + singletonService2);
 
-
+        //검증하기
+        assertThat(singletonService1).isSameAs(singletonService2);
+        // same == 같은지 비교 // equals 자바의 이퀄스와 같은 의미다.
     }
 }
 
