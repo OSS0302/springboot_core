@@ -16,14 +16,17 @@ import oss.core.order.OrderServiceImpl;
 public class AppConfig {
     @Bean
     public MemberService memberService(){
+        System.out.println("call AppConfig.memberService");
         return  new MemberServiceImpl(memberRepository()); // 멤버 서비스 구현체에서 만들고   appconfig에서 메모리 멤머 레포지토리를 쓸거야 의존관계 주입
     }
     @Bean
     public  MemberRepository memberRepository() {
+        System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
     @Bean
     public OrderService orderService(){
+        System.out.println("call AppConfig.orderService");
         return new OrderServiceImpl(
                 memberRepository(),discountPolicy());
     }
