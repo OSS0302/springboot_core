@@ -19,7 +19,7 @@ public class AppConfig {
         return  new MemberServiceImpl(memberRepository()); // 멤버 서비스 구현체에서 만들고   appconfig에서 메모리 멤머 레포지토리를 쓸거야 의존관계 주입
     }
     @Bean
-    public static MemberRepository memberRepository() {
+    public  MemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
     @Bean
