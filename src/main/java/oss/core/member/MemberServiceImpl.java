@@ -1,9 +1,13 @@
 package oss.core.member;
 
-public class MemberServiceImpl implements MemberService {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
+public class MemberServiceImpl implements MemberService {
     private  final MemberRepository memberRepository;// 추상화애만 의존한다.
 
+    @Autowired //자동 의존관계주입 생성자에 @Autowired를 붙여주면 된다.
     public MemberServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
