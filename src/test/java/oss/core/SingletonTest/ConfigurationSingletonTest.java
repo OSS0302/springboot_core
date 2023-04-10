@@ -43,5 +43,6 @@ public class ConfigurationSingletonTest {
         // 출력하기
         System.out.println("bean = " + bean.getClass()); //get bean 을 해야 클래스 타입을 알수있다.
         //bean = class oss.core.AppConfig$$EnhancerBySpringCGLIB$$de2e9d4e
+
     }
 }
