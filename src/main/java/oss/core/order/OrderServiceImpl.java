@@ -9,8 +9,7 @@ import oss.core.member.MemberRepository;
 import oss.core.member.MemoryMemberRepository;
 @Component
 public class OrderServiceImpl implements  OrderService {
-    //추상에만 의존해야하는데 구현에도 의존하니까 DIP위반이다.
-    //private final DiscountPolicy discountPolicy = new FixDiscountPolicy();//회원 고정할인 객체생성
+    //추상에만 의존해야하는데 구현에도 의존하니까 DIP위반이다.//private final DiscountPolicy discountPolicy = new FixDiscountPolicy();//회원 고정할인 객체생성
     private  MemberRepository memberRepository; // 회원 레포지토리 생성
     private  DiscountPolicy discountPolicy;// 회원 할인 객체 변경하기//
     @Autowired
@@ -22,11 +21,8 @@ public class OrderServiceImpl implements  OrderService {
     public void setMemberRepository(MemberRepository memberRepository) {
         System.out.println("memberRepository = " + memberRepository);
         this.memberRepository = memberRepository;
-    }// 생성자 가 한개 인경우에만 @Autowired 생략이 가능하다. 일반적으로 문서에 null 있어도됩니다. 하지 않은 경우를 제외 하고 생성자 값이 있어야한다.
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
     }
+
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
