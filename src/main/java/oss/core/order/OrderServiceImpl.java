@@ -20,6 +20,11 @@ public class OrderServiceImpl implements  OrderService {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
+    @Autowired //일반 메서드 주입  일반 메서드를 통해서 주입 받을 수 있다. 생성자 주입과 같다
+    public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy){
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
