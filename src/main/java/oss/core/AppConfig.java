@@ -27,8 +27,8 @@ public class AppConfig {
     @Bean
     public OrderService orderService(){
         System.out.println("call AppConfig.orderService");
-        return new OrderServiceImpl(
-                memberRepository(),discountPolicy());
+        //return new OrderServiceImpl(memberRepository(),discountPolicy());
+        return  null; // 필터 주입하기 위한 테스트를 위해서 null 반환한다.
     }
     @Bean
     public DiscountPolicy discountPolicy (){
