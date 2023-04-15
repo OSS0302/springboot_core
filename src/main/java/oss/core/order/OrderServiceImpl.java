@@ -15,19 +15,12 @@ public class OrderServiceImpl implements  OrderService {
 
    // 생성자 가 한개 인경우에만 @Autowired 생략이 가능하다. 일반적으로 문서에 null 있어도됩니다. 하지 않은 경우를 제외 하고 생성자 값이 있어야한다.
     // 수정자 주입 다른 개발자 필요하면 수정해서 쓸수있는 있으니 생성자 주입을 사용하자 // 테스트 누락을 위해서 수정자 주입을 쓴다.
+
     @Autowired
-    public void setMemberRepository(MemberRepository memberRepository){
-        this.memberRepository =memberRepository;
-    }
-    @Autowired
-    public void setDiscountPolicy(DiscountPolicy discountPolicy){
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
-//    @Autowired
-//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-//        this.memberRepository = memberRepository;
-//        this.discountPolicy = discountPolicy;
-//    }
 
 
     @Override
