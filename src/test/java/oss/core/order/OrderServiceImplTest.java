@@ -1,6 +1,10 @@
 package oss.core.order;
 
 import org.junit.jupiter.api.Test;
+import oss.core.discount.FixDiscountPolicy;
+import oss.core.member.Grade;
+import oss.core.member.Member;
+import oss.core.member.MemoryMemberRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,7 +13,9 @@ class OrderServiceImplTest {
 
     @Test
     void createOrder(){
-        OrderServiceImpl orderService =new OrderServiceImpl();
+        MemoryMemberRepository MemberRepository = new MemoryMemberRepository();
+        MemberRepository.save(new Member(1L,"name", Grade.VIP));
+        OrderServiceImpl orderService =new OrderServiceImpl(MemberRepository,new FixDiscountPolicy());
         orderService.createOrder(1L,"itemA",10000);
 
     }
