@@ -22,6 +22,8 @@ public class OrderServiceImpl implements  OrderService {
     // 수정자 주입 다른 개발자 필요하면 수정해서 쓸수있는 있으니 생성자 주입을 사용하자 // 테스트 누락을 위해서 수정자 주입을 쓴다.
 
     // 생성자 한개인 경우에는 @AutoWried를 생략이 가능하다
+
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
