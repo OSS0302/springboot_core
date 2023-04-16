@@ -27,8 +27,8 @@ public class AppConfig {
     @Bean
     public OrderService orderService(){
         System.out.println("call AppConfig.orderService");
-        //return new OrderServiceImpl(memberRepository(),discountPolicy());
-        return null; // 테스트를 위해서 잠시 null로 반환한다.
+        return new OrderServiceImpl(memberRepository(),discountPolicy());
+        //return null; // 테스트를 위해서 잠시 null로 반환한다.
 
     }
     @Bean
