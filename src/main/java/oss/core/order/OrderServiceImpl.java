@@ -2,6 +2,7 @@ package oss.core.order;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import oss.core.discount.DiscountPolicy;
 
@@ -25,9 +26,9 @@ public class OrderServiceImpl implements  OrderService {
     // 생성자 한개인 경우에는 @AutoWried를 생략이 가능하다
 
     @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy rateDiscountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("maindiscountPolicy") DiscountPolicy discountPolicy) {
             this.memberRepository = memberRepository;
-            this.discountPolicy = rateDiscountPolicy;
+            this.discountPolicy = discountPolicy;
     }
 
     @Override
