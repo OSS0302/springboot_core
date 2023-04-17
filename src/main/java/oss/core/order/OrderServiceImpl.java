@@ -24,11 +24,10 @@ public class OrderServiceImpl implements  OrderService {
     // 생성자 한개인 경우에는 @AutoWried를 생략이 가능하다
 
     @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy rateDiscountPolicy) {
+            this.memberRepository = memberRepository;
+            this.discountPolicy = rateDiscountPolicy;
     }
-
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
