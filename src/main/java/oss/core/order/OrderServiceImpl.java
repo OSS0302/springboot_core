@@ -17,6 +17,7 @@ public class OrderServiceImpl implements  OrderService {
     // final키워드생성자 주입을 사용하면 필드에final키워드를 사용할 수 있다.
     // 그래서 생성자에서 혹시라도 값이 설정되지 않는 오류를 컴파일 시점에 막아준다
 
+    @Autowired private  DiscountPolicy rateDiscountPolicy; // 필드 의존관계주입을 해도 테스트는 성공한다.
 
    // 생성자 가 한개 인경우에만 @Autowired 생략이 가능하다. 일반적으로 문서에 null 있어도됩니다. 하지 않은 경우를 제외 하고 생성자 값이 있어야한다.
     // 수정자 주입 다른 개발자 필요하면 수정해서 쓸수있는 있으니 생성자 주입을 사용하자 // 테스트 누락을 위해서 수정자 주입을 쓴다.
