@@ -2,7 +2,6 @@ package oss.core.autowired;
 
 
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -25,9 +24,10 @@ public class AllBeanTest {
         DiscountService discountService = ac.getBean(DiscountService.class);
         // 멤버 생성하기
         Member member = new Member(1L, "UserA", Grade.VIP);
-       discountService.discount(member, 10000, "fixDiscountPolicy");
-
-
+            int discountPrice = discountService.discount(member, 10000, "fixDiscountPolicy");
+        //검증하기
+        assertThat(discountService).isInstanceOf(DiscountService.class);
+        assertThat(discountPrice).isEqualTo(1000);
     }
 
     static class DiscountService{
@@ -42,7 +42,8 @@ public class AllBeanTest {
             System.out.println("policies = " + policies);
         }
 
-        public void discount(Member member, int i, String fixDiscountPolicy) {
+        public int discount(Member member, int price, String fixDiscountPolicy) {
+            return 0;
         }
     }
 
