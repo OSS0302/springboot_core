@@ -24,10 +24,15 @@ public class AllBeanTest {
         DiscountService discountService = ac.getBean(DiscountService.class);
         // 멤버 생성하기
         Member member = new Member(1L, "UserA", Grade.VIP);
-            int discountPrice = discountService.discount(member, 10000, "fixDiscountPolicy");
+            int discountPrice = discountService.discount(member, 10000, "fixDiscountPolicy"); // 고정 할인 정책
         //검증하기
         assertThat(discountService).isInstanceOf(DiscountService.class);
         assertThat(discountPrice).isEqualTo(1000);
+        System.out.println("discountPrice = " + discountPrice);
+
+        int rateDiscountPrice = discountService.discount(member, 20000, "rateDiscountPolicy"); // 비율 할인 정책
+        assertThat(rateDiscountPrice).isEqualTo(2000);
+        System.out.println("rateDiscountPrice = " + rateDiscountPrice);
     }
 
     static class DiscountService{
