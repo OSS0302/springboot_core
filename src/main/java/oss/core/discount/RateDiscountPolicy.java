@@ -1,11 +1,12 @@
 package oss.core.discount;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import oss.core.member.Grade;
 import oss.core.member.Member;
 @Component
-@Qualifier("maindiscountPolicy")
+@Primary // @Primary 사용@Primary는 우선순위를 정하는 방법이다. @Autowired시에 여러 빈이 매칭되면@Primary가 우선권을 가진다.
 public class RateDiscountPolicy implements  DiscountPolicy{
     private  int discountPercent =10; //구매한 금액에 10%을 할인을 하겠다.
 
