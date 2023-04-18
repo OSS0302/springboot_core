@@ -6,7 +6,7 @@ import oss.core.member.Grade;
 import oss.core.member.Member;
 
 @Component
-@Qualifier("fixdiscountPolicy")
+
 public class FixDiscountPolicy implements DiscountPolicy {
 
     private int discountFixAmount =1000; // vip만 1000원 할인
