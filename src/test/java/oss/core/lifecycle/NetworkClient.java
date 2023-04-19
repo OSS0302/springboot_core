@@ -25,14 +25,14 @@ public class  NetworkClient {
         }
 
 
-    public void init() throws Exception { //스프링이  의존관계주입이 다  끝나면 호출하겠다.
+    public void init() throws Exception { //스프링이  의존관계주입이 다  끝나면 호출하겠다.//afterPropertiesSet()->init
         System.out.println("NetworkClient.afterPropertiesSet");
         connect();
         call("초기화  연결 메시지");
     }
 
 
-    public void close() throws Exception {
+    public void close() throws Exception { //destroy()-> close
         System.out.println("NetworkClient.destroy");
         discount(); // discount 호출하겠다.
     }
