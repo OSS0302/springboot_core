@@ -20,11 +20,9 @@ public class NetworkClient {
 
     }
     // 서비스 종료시 호출
-        public void discount(){
-            System.out.println("close"+url);
+        public void discount() {
+            System.out.println("close" + url);
         }
-
-    @Override
     public void init() throws Exception { //스프링이  의존관계주입이 다  끝나면 호출하겠다.정
         System.out.println("NetworkClient.afterPropertiesSet");
         connect();
