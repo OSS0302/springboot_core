@@ -15,7 +15,7 @@ public class BeanLifeCycleTest {
     }
     @Configuration
     static class LifeCycleConfig{
-        @Bean(initMethod ="init",destroyMethod = "close") // 빈 등록 하면 지정 한다.
+        @Bean
         public NetworkClient networkClient(){  //호출된 결과물이 빈에 등록이된다..
             NetworkClient networkClient = new NetworkClient();
             networkClient.setUrl("http://hello-spring.dev");
