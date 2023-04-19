@@ -31,7 +31,7 @@ public class NetworkClient {
         call("초기화  연결 메시지");
     }
 
-    @Override
+
     public void close() throws Exception {
         System.out.println("NetworkClient.destroy");
         discount(); // discount 호출하겠다.
