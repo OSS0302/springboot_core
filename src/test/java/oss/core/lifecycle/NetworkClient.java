@@ -1,5 +1,7 @@
 package oss.core.lifecycle;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 public class NetworkClient {
     private String url; // url  적기
@@ -23,15 +25,16 @@ public class NetworkClient {
         public void discount() {
             System.out.println("close" + url);
         }
+        @PostConstruct // 생성이 된 이후
     public void init() throws Exception { //스프링이  의존관계주입이 다  끝나면 호출하겠다.정
-        System.out.println("NetworkClient.afterPropertiesSet");
+        System.out.println("NetworkClient.init");
         connect();
         call("초기화  연결 메시지");
     }
 
-
+    @PreDestroy // 소멸 되기 전에
     public void close() throws Exception {
-        System.out.println("NetworkClient.destroy");
+        System.out.println("NetworkClient.close");
         discount(); // discount 호출하겠다.
     }
 }
