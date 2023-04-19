@@ -1,14 +1,14 @@
 package oss.core.lifecycle;
 
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
-public class NetworkClient implements InitializingBean {
+public class NetworkClient implements InitializingBean, DisposableBean {
     private String url; // url  적기
 
     public NetworkClient() {
         System.out.println("생성자 호출, url= "+url);
-        connect();
-         call("초기화  연결 메시지");
+
     }
 
     public void setUrl(String url) {
@@ -28,8 +28,14 @@ public class NetworkClient implements InitializingBean {
         }
 
     @Override
-    public void afterPropertiesSet() throws Exception { //의존관계주입이 끝나면 호출하겠다.
+    public void afterPropertiesSet() throws Exception { //스프링이  의존관계주입이 다  끝나면 호출하겠다.
+        connect();
+        call("초기화  연결 메시지");
+    }
 
+    @Override
+    public void destroy() throws Exception {
+        discount(); // discount 호출하겠다.
     }
 }
 
