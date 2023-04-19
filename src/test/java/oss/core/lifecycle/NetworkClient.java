@@ -1,12 +1,14 @@
 package oss.core.lifecycle;
 
-public class NetworkClient {
+import org.springframework.beans.factory.InitializingBean;
+
+public class NetworkClient implements InitializingBean {
     private String url; // url  적기
 
     public NetworkClient() {
         System.out.println("생성자 호출, url= "+url);
         connect();
-        call("초기화  연결 메시지");
+         call("초기화  연결 메시지");
     }
 
     public void setUrl(String url) {
@@ -24,5 +26,10 @@ public class NetworkClient {
         public void discount(){
             System.out.println("close"+url);
         }
+
+    @Override
+    public void afterPropertiesSet() throws Exception { //의존관계주입이 끝나면 호출하겠다.
+
     }
+}
 
