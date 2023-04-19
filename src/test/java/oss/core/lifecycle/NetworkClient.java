@@ -10,7 +10,6 @@ public class NetworkClient implements InitializingBean, DisposableBean {
         System.out.println("생성자 호출, url= "+url);
 
     }
-
     public void setUrl(String url) {
         this.url = url;
     }
@@ -29,12 +28,14 @@ public class NetworkClient implements InitializingBean, DisposableBean {
 
     @Override
     public void afterPropertiesSet() throws Exception { //스프링이  의존관계주입이 다  끝나면 호출하겠다.
+        System.out.println("NetworkClient.afterPropertiesSet");
         connect();
         call("초기화  연결 메시지");
     }
 
     @Override
     public void destroy() throws Exception {
+        System.out.println("NetworkClient.destroy");
         discount(); // discount 호출하겠다.
     }
 }
