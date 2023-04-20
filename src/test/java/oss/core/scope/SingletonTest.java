@@ -14,10 +14,10 @@ import javax.annotation.PreDestroy;
 public class SingletonTest {
     @Test
     void singletonBeanFind(){
-        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(SinglentonBean.class);
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(SingletonBean.class);
         // 조회하기
-        SinglentonBean singlentonBean1 = ac.getBean(SinglentonBean.class);
-        SinglentonBean singlentonBean2 = ac.getBean(SinglentonBean.class);
+        SingletonBean singlentonBean1 = ac.getBean(SingletonBean.class);
+        SingletonBean singlentonBean2 = ac.getBean(SingletonBean.class);
         System.out.println("singlentonBean1 = " + singlentonBean1);
         System.out.println("singlentonBean2 = " + singlentonBean2);
         // 검증 하기
@@ -25,14 +25,14 @@ public class SingletonTest {
         ac.close();
     }
     @Scope("singleton") // 수동등록
-    static class SinglentonBean{
+    static class SingletonBean{
         @PostConstruct
         public void init(){
             System.out.println("SingletonBean.init");
         }
         @PreDestroy
-        public void destory(){
-            System.out.println("SinglentonBean.destory");
+        public void destroy(){
+            System.out.println("SingletonBean.destroy");
         }
     }
 }
