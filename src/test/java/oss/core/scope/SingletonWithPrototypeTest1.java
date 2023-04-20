@@ -37,6 +37,12 @@ public class SingletonWithPrototypeTest1 {
         public ClientBean(PrototypeBean prototypeBean) {
             this.prototypeBean = prototypeBean;
         }
+        public int logic(){
+            prototypeBean.addCount();
+            int count = prototypeBean.getCount(); //코드를 합칠수있다. command+ option +N
+            return  count;
+            //return prototypeBean.getCount();이렇게 나온다.
+        }
 
     }
     @Scope("prototype")
