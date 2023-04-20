@@ -18,14 +18,17 @@ public class AutowiredTest {
 
     }
    static class TestBean{
+       @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
         @Autowired(required = false)
        public void setNoBean1(Member noBean1){
             System.out.println("noBean1 = " + noBean1);
         }
+       @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
         @Autowired
        public void setNoBean2(@Nullable Member noBean2){ // @Nullable 하고 스프링빈이 없다면  null 값으로 들어온다.
             System.out.println("noBean2 = " + noBean2);
         }
+       @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
         @Autowired
         public void setNoBean3(Optional<Member>noBean3){ //자바 8에서 쓸 수있는Optional 스프링 빈 없으면 Optional.empty
             System.out.println("noBean3 = " + noBean3);
