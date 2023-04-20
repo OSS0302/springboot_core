@@ -3,6 +3,7 @@ package oss.core.scope;
 import lombok.RequiredArgsConstructor;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -44,15 +45,14 @@ public class SingletonWithPrototypeTest1 {
     @Scope("singleton")
     //@RequiredArgsConstructor 이용해도 된다.
     static class ClientBean{
-            private final PrototypeBean prototypeBean; // 생성시점에 주입이됩니다.
+
+        @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+        @Autowired
+        private ObjectProvider<PrototypeBean>prototypeBeanProvider;
 
 
-            @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
-            @Autowired
-            public ClientBean(PrototypeBean prototypeBean) {
-                this.prototypeBean = prototypeBean;
-            }
             public int logic(){
+                PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
                 prototypeBean.addCount();
                 int count = prototypeBean.getCount(); //코드를 합칠수있다. command+ option +N
                 return  count;
