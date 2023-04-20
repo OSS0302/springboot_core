@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+
+import static org.assertj.core.api.Assertions.*;
+
 @Component
 public class SingletonWithPrototypeTest1 {
     @Test
@@ -17,21 +20,29 @@ public class SingletonWithPrototypeTest1 {
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(PrototypeBean.class);
         PrototypeBean prototypeBean1 = ac.getBean(PrototypeBean.class);
         prototypeBean1.addCount();
-        Assertions.assertThat(prototypeBean1.getCount()).isEqualTo(1);
+        assertThat(prototypeBean1.getCount()).isEqualTo(1);
 
         PrototypeBean prototypeBean2 = ac.getBean(PrototypeBean.class);
         prototypeBean2.addCount();
-        Assertions.assertThat(prototypeBean2.getCount()).isEqualTo(1);
+        assertThat(prototypeBean2.getCount()).isEqualTo(1);
     }
 
     @Test
     void singletonClientUsePrototype(){
-        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(PrototypeBean.class);
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(ClientBean.class,PrototypeBean.class);
+        ClientBean clientBean1 = ac.getBean(ClientBean.class);
+       int count1 =  clientBean1.logic();
+       assertThat(count1).isEqualTo(1);
+        ClientBean clientBean2 = ac.getBean(ClientBean.class);
+        int count2 = clientBean2.logic();
+        assertThat(count2).isEqualTo(2);
     }
+
     @Scope("singleton")
     //@RequiredArgsConstructor 이용해도 된다.
     static class ClientBean{
         private final PrototypeBean prototypeBean;
+
         @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
         @Autowired
         public ClientBean(PrototypeBean prototypeBean) {
@@ -43,7 +54,6 @@ public class SingletonWithPrototypeTest1 {
             return  count;
             //return prototypeBean.getCount();이렇게 나온다.
         }
-
     }
     @Scope("prototype")
         static class PrototypeBean{
