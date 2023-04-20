@@ -38,7 +38,7 @@ public class SingletonWithPrototypeTest1 {
         System.out.println("count1 = " + count1);
         ClientBean clientBean2 = ac.getBean(ClientBean.class);
         int count2 = clientBean2.logic();
-        assertThat(count2).isEqualTo(1);
+        assertThat(count2).isEqualTo(2);
         System.out.println("count2 = " + count2);
     }
 
@@ -49,8 +49,6 @@ public class SingletonWithPrototypeTest1 {
         @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
         @Autowired
         private ObjectProvider<PrototypeBean>prototypeBeanProvider;
-
-
             public int logic(){
                 PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
                 prototypeBean.addCount();
