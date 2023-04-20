@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -33,27 +34,32 @@ public class SingletonWithPrototypeTest1 {
         ClientBean clientBean1 = ac.getBean(ClientBean.class);
        int count1 =  clientBean1.logic();
        assertThat(count1).isEqualTo(1);
+        System.out.println("count1 = " + count1);
         ClientBean clientBean2 = ac.getBean(ClientBean.class);
         int count2 = clientBean2.logic();
-        assertThat(count2).isEqualTo(2);
+        assertThat(count2).isEqualTo(1);
+        System.out.println("count2 = " + count2);
     }
 
     @Scope("singleton")
     //@RequiredArgsConstructor 이용해도 된다.
     static class ClientBean{
-        private final PrototypeBean prototypeBean;
+           // private final PrototypeBean prototypeBean; // 생성시점에 주입이됩니다.
+           @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+            @Autowired ApplicationContext applicationContext;
 
-        @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
-        @Autowired
-        public ClientBean(PrototypeBean prototypeBean) {
-            this.prototypeBean = prototypeBean;
-        }
-        public int logic(){
-            prototypeBean.addCount();
-            int count = prototypeBean.getCount(); //코드를 합칠수있다. command+ option +N
-            return  count;
-            //return prototypeBean.getCount();이렇게 나온다.
-        }
+//            @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+//            @Autowired
+//            public ClientBean(PrototypeBean prototypeBean) {
+//                this.prototypeBean = prototypeBean;
+//            }
+            public int logic(){
+                PrototypeBean prototypeBean = applicationContext.getBean(PrototypeBean.class);
+                prototypeBean.addCount();
+                int count = prototypeBean.getCount(); //코드를 합칠수있다. command+ option +N
+                return  count;
+                //return prototypeBean.getCount();이렇게 나온다.
+            }
     }
     @Scope("prototype")
         static class PrototypeBean{
