@@ -44,17 +44,15 @@ public class SingletonWithPrototypeTest1 {
     @Scope("singleton")
     //@RequiredArgsConstructor 이용해도 된다.
     static class ClientBean{
-           // private final PrototypeBean prototypeBean; // 생성시점에 주입이됩니다.
-           @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
-            @Autowired ApplicationContext applicationContext;
+            private final PrototypeBean prototypeBean; // 생성시점에 주입이됩니다.
 
-//            @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
-//            @Autowired
-//            public ClientBean(PrototypeBean prototypeBean) {
-//                this.prototypeBean = prototypeBean;
-//            }
+
+            @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+            @Autowired
+            public ClientBean(PrototypeBean prototypeBean) {
+                this.prototypeBean = prototypeBean;
+            }
             public int logic(){
-                PrototypeBean prototypeBean = applicationContext.getBean(PrototypeBean.class);
                 prototypeBean.addCount();
                 int count = prototypeBean.getCount(); //코드를 합칠수있다. command+ option +N
                 return  count;
