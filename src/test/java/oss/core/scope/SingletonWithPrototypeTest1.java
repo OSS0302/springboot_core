@@ -1,13 +1,16 @@
 package oss.core.scope;
 
+import lombok.RequiredArgsConstructor;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-
+@Component
 public class SingletonWithPrototypeTest1 {
     @Test
     void prototypeFind(){
@@ -19,8 +22,22 @@ public class SingletonWithPrototypeTest1 {
         PrototypeBean prototypeBean2 = ac.getBean(PrototypeBean.class);
         prototypeBean2.addCount();
         Assertions.assertThat(prototypeBean2.getCount()).isEqualTo(1);
+    }
 
-        ac.close();
+    @Test
+    void singletonClientUsePrototype(){
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(PrototypeBean.class);
+    }
+    @Scope("singleton")
+    //@RequiredArgsConstructor 이용해도 된다.
+    static class ClientBean{
+        private final PrototypeBean prototypeBean;
+        @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+        @Autowired
+        public ClientBean(PrototypeBean prototypeBean) {
+            this.prototypeBean = prototypeBean;
+        }
+
     }
     @Scope("prototype")
         static class PrototypeBean{
@@ -31,7 +48,6 @@ public class SingletonWithPrototypeTest1 {
             }
             public int getCount(){
                 return count;
-
         }
         @PostConstruct
         public void  init(){
@@ -42,5 +58,4 @@ public class SingletonWithPrototypeTest1 {
             System.out.println("PrototypeBean.destroy");
         }
     }
-
 }
