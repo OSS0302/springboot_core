@@ -19,12 +19,13 @@ public class LogDemoController {
 
     @RequestMapping("log-demo")
     @ResponseBody // 문자 그대로 응답을 보낼 수있다.
-    public String logDemo(HttpServletRequest request) {
+    public String logDemo(HttpServletRequest request) throws InterruptedException {
         MyLogger myLogger = myLoggerObjectProvider.getObject();
         String requestURL = request.getRequestURI().toString();
         myLogger.setRequestURL(requestURL); // URL 정보 보내기
 
         myLogger.log("controller test");
+        Thread.sleep(1000);// 1초 동안 잠시 일시정지 시킨다.그러면
         logDemoService.logic("testId"); // 서비스 호출
         return "OK";
     }
