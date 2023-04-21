@@ -22,7 +22,7 @@ public class LogDemoController {
     public String logDemo(HttpServletRequest request) throws InterruptedException {
 
         String requestURL = request.getRequestURI().toString();
-        System.out.println("myLogger = " + myLogger); // 로그를 찍어서 확인한다.
+        System.out.println("myLogger = " + myLogger.getClass()); // 로그를 찍어서 확인한다.
         myLogger.setRequestURL(requestURL); // URL 정보 보내기
 
         myLogger.log("controller test");
